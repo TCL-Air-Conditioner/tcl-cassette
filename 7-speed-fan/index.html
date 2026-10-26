@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>TCL Cassette | 7-Speed Wind</title>
+<title>TCL Cassette | 7-Speed Wind Control</title>
 
 <style>
 :root {
@@ -75,7 +75,6 @@ video {
     display: block;
 }
 
-/* 独立预览图层 */
 .preview-button {
     position: absolute;
     inset: 0;
@@ -182,7 +181,7 @@ video {
     <h1>TCL Cassette</h1>
 
     <div class="video-title">
-        7-Speed Wind
+        7-Speed Wind Control
     </div>
 
     <div class="video-box">
@@ -201,23 +200,21 @@ video {
             Your browser does not support HTML video.
         </video>
 
-        <!-- 预览图，点击后隐藏并启动视频 -->
         <button
             class="preview-button"
             id="previewButton"
             type="button"
-            aria-label="Play 7-Speed Wind video"
+            aria-label="Play 7-Speed Wind Control video"
         >
             <img
                 src="preview.jpg"
-                alt="7-Speed Wind video preview"
+                alt="7-Speed Wind Control video preview"
             >
             <span class="play-icon" aria-hidden="true">
                 &#9654;
             </span>
         </button>
 
-        <!-- 视频加载状态和错误提示 -->
         <div
             class="video-message"
             id="videoMessage"
@@ -268,10 +265,7 @@ video {
 
     button.addEventListener('click', function () {
 
-        // 立即隐藏封面
         button.hidden = true;
-
-        // 显示加载提示
         setLoading();
 
         if (video.error) {
@@ -281,7 +275,6 @@ video {
             return;
         }
 
-        // 在用户点击事件中直接播放 MP4
         const playRequest = video.play();
 
         if (
@@ -297,12 +290,10 @@ video {
         }
     });
 
-    // 真正开始播放后隐藏加载提示
     video.addEventListener('playing', function () {
         message.hidden = true;
     });
 
-    // 视频加载失败
     video.addEventListener('error', function () {
         if (button.hidden) {
             showError(
