@@ -8,7 +8,6 @@
 <title>TCL Cassette | Dehumidification Mode</title>
 
 <style>
-
 :root {
     --navy: #17345f;
     --blue-gray: #637b98;
@@ -64,16 +63,84 @@ h1 {
     max-width: 850px;
     aspect-ratio: 16 / 9;
     margin: 0 auto;
+    position: relative;
+    overflow: hidden;
+    background: #081423;
 }
 
 video {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    display: block;
+}
+
+.preview-button {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    background: #081423;
+    cursor: pointer;
+}
+
+.preview-button img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.play-icon {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: rgba(23, 52, 95, 0.88);
+    color: #fff;
+    font-size: 31px;
+    line-height: 1;
+    padding-left: 4px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, .2);
+}
+
+.preview-button[hidden],
+.video-message[hidden] {
+    display: none;
+}
+
+.video-message {
+    position: absolute;
+    z-index: 2;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px;
+    background: rgba(8, 20, 35, .9);
+    color: #fff;
+    font-size: 15px;
+    text-align: center;
+}
+
+.video-message a {
+    color: #afd8ff;
 }
 
 @media (max-width: 600px) {
-
     .container {
         padding: 15px;
     }
@@ -92,8 +159,12 @@ video {
         margin-bottom: 12px;
     }
 
+    .play-icon {
+        width: 56px;
+        height: 56px;
+        font-size: 28px;
+    }
 }
-
 </style>
 </head>
 
@@ -102,13 +173,12 @@ video {
 <div class="container">
 
     <img
-    class="logo"
-    src="../brand-logo.png"
+        class="logo"
+        src="../brand-logo.png"
+        alt="TCL Logo"
     >
 
-    <h1>
-        TCL Cassette
-    </h1>
+    <h1>TCL Cassette</h1>
 
     <div class="video-title">
         Dehumidification Mode
@@ -116,16 +186,124 @@ video {
 
     <div class="video-box">
 
-        <video controls preload="auto" playsinline>
+        <video
+            id="trainingVideo"
+            controls
+            preload="auto"
+            playsinline
+            webkit-playsinline
+        >
             <source
-            src="dehumuid.mp4"
-            type="video/mp4"
+                src="dehumuid.mp4"
+                type="video/mp4"
             >
+            Your browser does not support HTML video.
         </video>
+
+        <button
+            class="preview-button"
+            id="previewButton"
+            type="button"
+            aria-label="Play Dehumidification Mode video"
+        >
+            <img
+                src="preview-dehumidification-mode.jpg"
+                alt="Dehumidification Mode video preview"
+            >
+            <span class="play-icon" aria-hidden="true">
+                &#9654;
+            </span>
+        </button>
+
+        <div
+            class="video-message"
+            id="videoMessage"
+            role="status"
+            aria-live="polite"
+            hidden
+        >
+            <span id="messageText">
+                Loading video...
+            </span>
+
+            <a
+                id="directVideoLink"
+                href="dehumuid.mp4"
+                target="_blank"
+                rel="noopener"
+                hidden
+            >
+                Open MP4 directly
+            </a>
+        </div>
 
     </div>
 
 </div>
+
+<script>
+(function () {
+
+    const video = document.getElementById('trainingVideo');
+    const button = document.getElementById('previewButton');
+    const message = document.getElementById('videoMessage');
+    const messageText = document.getElementById('messageText');
+    const directLink = document.getElementById('directVideoLink');
+
+    function setLoading() {
+        messageText.textContent = 'Loading video...';
+        directLink.hidden = true;
+        message.hidden = false;
+    }
+
+    function showError(detail) {
+        messageText.textContent =
+            detail || 'Video failed to load.';
+        directLink.hidden = false;
+        message.hidden = false;
+    }
+
+    button.addEventListener('click', function () {
+
+        button.hidden = true;
+        setLoading();
+
+        if (video.error) {
+            showError(
+                'Video cannot be loaded. Check dehumuid.mp4.'
+            );
+            return;
+        }
+
+        const playRequest = video.play();
+
+        if (
+            playRequest &&
+            typeof playRequest.catch === 'function'
+        ) {
+            playRequest.catch(function (error) {
+                showError(
+                    'Playback could not start: ' +
+                    (error.message || error.name)
+                );
+            });
+        }
+    });
+
+    video.addEventListener('playing', function () {
+        message.hidden = true;
+    });
+
+    video.addEventListener('error', function () {
+        if (button.hidden) {
+            showError(
+                'Video failed to load. Check the filename, network, or MP4 format.'
+            );
+        }
+    });
+
+})();
+</script>
 
 </body>
 </html>
