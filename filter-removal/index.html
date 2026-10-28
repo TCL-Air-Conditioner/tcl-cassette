@@ -166,6 +166,7 @@ video {
     }
 }
 </style>
+<link rel="stylesheet" href="../assets/training-player.css">
 </head>
 
 <body>
@@ -215,95 +216,36 @@ video {
             </span>
         </button>
 
-        <div
-            class="video-message"
-            id="videoMessage"
-            role="status"
-            aria-live="polite"
-            hidden
-        >
-            <span id="messageText">
-                Loading video...
-            </span>
-
-            <a
-                id="directVideoLink"
-                href="filter-removal.mp4"
-                target="_blank"
-                rel="noopener"
-                hidden
-            >
-                Open MP4 directly
-            </a>
-        </div>
-
     </div>
+
+
+    <div class="player-status-slot">
+        <div class="player-status" id="videoMessage" hidden>
+            <span id="messageText" role="status" aria-live="polite" aria-atomic="true"></span>
+            <button id="retryButton" type="button" hidden>Reload video</button>
+            <a id="directVideoLink" href="filter-removal.mp4" target="_blank" rel="noopener" hidden>Open MP4 directly</a>
+        </div>
+    </div>
+
+    <nav class="video-directory" aria-label="Product video directory">
+        <h2>Operation Videos</h2>
+        <ul>
+            <li><a href="../sky-airflow/"><span>Sky Airflow</span></a></li>
+            <li><a href="../app-connect/"><span>APP Connection</span></a></li>
+            <li><a href="../carpet-style-airflow/"><span>Carpet-Style Airflow</span></a></li>
+            <li><a href="../7-speed-fan/"><span>7-Speed Wind Control</span></a></li>
+            <li><a href="../dehumidification-mode/"><span>Dehumidification Mode</span></a></li>
+            <li><a href="../wide-range-airflow/"><span>Wide Range of Swing Angle</span></a></li>
+            <li><a href="../filter-installation/"><span>Filter Installation</span></a></li>
+            <li><a href="../filter-removal/" aria-current="page"><span>Filter Removal</span><span class="current-video-label">Now playing</span></a></li>
+        </ul>
+    </nav>
 
 </div>
 
-<script>
-(function () {
 
-    const video = document.getElementById('trainingVideo');
-    const button = document.getElementById('previewButton');
-    const message = document.getElementById('videoMessage');
-    const messageText = document.getElementById('messageText');
-    const directLink = document.getElementById('directVideoLink');
 
-    function setLoading() {
-        messageText.textContent = 'Loading video...';
-        directLink.hidden = true;
-        message.hidden = false;
-    }
-
-    function showError(detail) {
-        messageText.textContent =
-            detail || 'Video failed to load.';
-        directLink.hidden = false;
-        message.hidden = false;
-    }
-
-    button.addEventListener('click', function () {
-
-        button.hidden = true;
-        setLoading();
-
-        if (video.error) {
-            showError(
-                'Video cannot be loaded. Check filter-removal.mp4.'
-            );
-            return;
-        }
-
-        const playRequest = video.play();
-
-        if (
-            playRequest &&
-            typeof playRequest.catch === 'function'
-        ) {
-            playRequest.catch(function (error) {
-                showError(
-                    'Playback could not start: ' +
-                    (error.message || error.name)
-                );
-            });
-        }
-    });
-
-    video.addEventListener('playing', function () {
-        message.hidden = true;
-    });
-
-    video.addEventListener('error', function () {
-        if (button.hidden) {
-            showError(
-                'Video failed to load. Check the filename, network, or MP4 format.'
-            );
-        }
-    });
-
-})();
-</script>
-
+<script src="../assets/training-player.js" defer></script>
 </body>
 </html>
+
