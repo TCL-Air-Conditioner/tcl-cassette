@@ -185,7 +185,7 @@ video {
         Sky Airflow
     </div>
 
-    <div class="video-box">
+    <div class="video-box video-stage">
 
         <video
             id="trainingVideo"
@@ -195,7 +195,7 @@ video {
             webkit-playsinline
         >
             <source
-                src="skyairflow.mp4"
+                src="skyairflow.mp4?v=ae165546e297276d"
                 type="video/mp4"
             >
             Your browser does not support HTML video.
@@ -203,7 +203,7 @@ video {
 
         <button
             class="preview-button"
-            id="previewButton"
+            id="videoPreview"
             type="button"
             aria-label="Play Sky Airflow video"
         >
@@ -220,24 +220,24 @@ video {
 
 
     <div class="player-status-slot">
-        <div class="player-status" id="videoMessage" hidden>
-            <span id="messageText" role="status" aria-live="polite" aria-atomic="true"></span>
-            <button id="retryButton" type="button" hidden>Reload video</button>
-            <a id="directVideoLink" href="skyairflow.mp4" target="_blank" rel="noopener" hidden>Open MP4 directly</a>
+        <div class="player-status" id="videoStatus" hidden>
+            <span id="statusText" role="status" aria-live="polite" aria-atomic="true"></span>
+            <button id="retryVideo" type="button" hidden>Reload video</button>
+            <a id="directVideo" href="skyairflow.mp4?v=ae165546e297276d" target="_blank" rel="noopener" hidden>Open MP4 directly</a>
         </div>
     </div>
 
     <nav class="video-directory" aria-label="Product video directory">
         <h2>Operation Videos</h2>
         <ul>
-            <li><a href="../sky-airflow/" aria-current="page"><span>Sky Airflow</span><span class="current-video-label">Now playing</span></a></li>
-            <li><a href="../app-connect/"><span>APP Connection</span></a></li>
-            <li><a href="../carpet-style-airflow/"><span>Carpet-Style Airflow</span></a></li>
-            <li><a href="../7-speed-fan/"><span>7-Speed Wind Control</span></a></li>
-            <li><a href="../dehumidification-mode/"><span>Dehumidification Mode</span></a></li>
-            <li><a href="../wide-range-airflow/"><span>Wide Range of Swing Angle</span></a></li>
-            <li><a href="../filter-installation/"><span>Filter Installation</span></a></li>
-            <li><a href="../filter-removal/"><span>Filter Removal</span></a></li>
+            <li><a class="video-link" href="../sky-airflow/" aria-current="page"><span>Sky Airflow</span></a></li>
+            <li><a class="video-link" href="../app-connect/"><span>APP Connection</span></a></li>
+            <li><a class="video-link" href="../carpet-style-airflow/"><span>Carpet-Style Airflow</span></a></li>
+            <li><a class="video-link" href="../7-speed-fan/"><span>7-Speed Wind Control</span></a></li>
+            <li><a class="video-link" href="../dehumidification-mode/"><span>Dehumidification Mode</span></a></li>
+            <li><a class="video-link" href="../wide-range-airflow/"><span>Wide Range of Swing Angle</span></a></li>
+            <li><a class="video-link" href="../filter-installation/"><span>Filter Installation</span></a></li>
+            <li><a class="video-link" href="../filter-removal/"><span>Filter Removal</span></a></li>
         </ul>
     </nav>
 
@@ -245,7 +245,8 @@ video {
 
 
 
-<script src="../assets/training-player.js" defer></script>
+<script id="videoCatalog" type="application/json">{"version": "95cd86d8907066e6", "root": "../", "topics": [{"slug": "sky-airflow", "title": "Sky Airflow", "file": "sky-airflow/skyairflow.mp4?v=ae165546e297276d", "cover": "sky-airflow/preview-sky-airflow.jpg", "hash": "ae165546e297276d541ea69ff9e66d98af53cf5d", "bytes": 2545595, "algorithm": "git-sha1"}, {"slug": "app-connect", "title": "APP Connection", "file": "app-connect/appconnec.mp4?v=d8068bffd7c6785f", "cover": "app-connect/preview-app-connect.jpg", "hash": "d8068bffd7c6785f8dbae1653e8477da8a20b3e8", "bytes": 5974982, "algorithm": "git-sha1"}, {"slug": "carpet-style-airflow", "title": "Carpet-Style Airflow", "file": "carpet-style-airflow/Carpet.mp4?v=a3cb1f0473b33469", "cover": "carpet-style-airflow/preview-carpet-style-airflow.jpg", "hash": "a3cb1f0473b33469fc9ae694a5555c19037d50db", "bytes": 1990776, "algorithm": "git-sha1"}, {"slug": "7-speed-fan", "title": "7-Speed Wind Control", "file": "7-speed-fan/7speed1.mp4?v=8c26fbdef50eede8", "cover": "7-speed-fan/preview.jpg", "hash": "8c26fbdef50eede8e670c70dd5f247f2da5a2f71", "bytes": 1854936, "algorithm": "git-sha1"}, {"slug": "dehumidification-mode", "title": "Dehumidification Mode", "file": "dehumidification-mode/dehumuid.mp4?v=0b9c2a93cd31e98c", "cover": "dehumidification-mode/preview-dehumidification-mode.jpg", "hash": "0b9c2a93cd31e98ceeff92629f8090cd35ea8cca", "bytes": 1266059, "algorithm": "git-sha1"}, {"slug": "wide-range-airflow", "title": "Wide Range of Swing Angle", "file": "wide-range-airflow/widerange.mp4?v=89bbc013dfb6858e", "cover": "wide-range-airflow/preview-wide-range-airflow.jpg", "hash": "89bbc013dfb6858ee73db07568956e5d1c37ce53", "bytes": 4542717, "algorithm": "git-sha1"}, {"slug": "filter-installation", "title": "Filter Installation", "file": "filter-installation/filter-installation.mp4?v=2eb16fd1400fbb54", "cover": "filter-installation/preview-filter-installation.jpg", "hash": "2eb16fd1400fbb541feb62c088647ae0627c3eb3", "bytes": 4176092, "algorithm": "git-sha1"}, {"slug": "filter-removal", "title": "Filter Removal", "file": "filter-removal/filter-removal.mp4?v=b1af0704e4fc357b", "cover": "filter-removal/preview-filter-removal.jpg", "hash": "b1af0704e4fc357b9cb06b380afd005e3d9d14b7", "bytes": 3349873, "algorithm": "git-sha1"}]}</script>
+<script src="../player.js?v=95cd86d8907066e6" defer></script>
 </body>
 </html>
 

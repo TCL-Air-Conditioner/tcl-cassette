@@ -121,3 +121,7 @@ video:focus-visible {
 @media (max-width: 420px) {
     .video-directory ul { grid-template-columns: 1fr; }
 }
+
+.video-directory a[aria-current="page"]::after {
+    content: "Now playing"; color: #486580; font-size: 12px; font-weight: 400;
+}
